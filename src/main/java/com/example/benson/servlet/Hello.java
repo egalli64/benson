@@ -1,4 +1,4 @@
-package com.example.benson;
+package com.example.benson.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
