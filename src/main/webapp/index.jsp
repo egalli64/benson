@@ -6,14 +6,20 @@
 <title>Benson</title>
 </head>
 <body>
-    <h1>Welcome to the Benson Project!</h1>
-    <c:choose>
-        <c:when test="${user eq null}">
-            <p>Please, login to proceed</p>
-        </c:when>
-        <c:otherwise>
-            <p>Welcome, ${user.name}!</p>
-        </c:otherwise>
-    </c:choose>
+    <nav>
+        <ul>
+            <c:choose>
+                <c:when test="${user eq null}">
+                    <li><a href="login.jsp">Login</a></li>
+                    <li><a href="register.jsp">Register</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li>Welcome, ${user.name}!</li>
+                    <li><a href="logout">Logout</a></li>
+                </c:otherwise>
+            </c:choose>
+        </ul>
+    </nav>
+    <h1>The Benson Project</h1>
 </body>
 </html>
