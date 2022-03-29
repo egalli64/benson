@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.example.benson.bean.User;
+import com.example.benson.dao.UserDao;
 
 @SuppressWarnings("serial")
 @WebServlet("/login")
@@ -23,9 +24,11 @@ public class Login extends HttpServlet {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
 
-        User user = new User(name == null || name.isBlank() ? "guest" : name, password);
-        request.getSession().setAttribute("user", user);
-        log.trace("Logged as " + user.getName());
+        try (UserDao dao = new UserDao()) {
+            User user = dao.getUser(name, password);
+            request.getSession().setAttribute("user", user);
+            log.trace("Logged as " + user.getName());
+        }
         request.getRequestDispatcher("/").forward(request, response);
     }
 }
