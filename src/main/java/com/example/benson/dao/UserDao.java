@@ -25,13 +25,13 @@ public class UserDao implements AutoCloseable {
     public UserDao() {
         try {
             URI dbUri = new URI(System.getenv("DATABASE_URL"));
-            log.trace(dbUri);
+            log.trace("Connecting to " + dbUri);
 
             String username = dbUri.getUserInfo().split(":")[0];
             String password = dbUri.getUserInfo().split(":")[1];
             String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
 
-            DriverManager.getConnection(dbUrl, username, password);
+            this.conn = DriverManager.getConnection(dbUrl, username, password);
         } catch (SQLException | URISyntaxException e) {
             throw new IllegalStateException("Database issue " + e.getMessage());
         }
