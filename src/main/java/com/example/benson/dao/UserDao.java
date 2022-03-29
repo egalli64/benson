@@ -1,8 +1,6 @@
 package com.example.benson.dao;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,15 +22,9 @@ public class UserDao implements AutoCloseable {
 
     public UserDao() {
         try {
-            URI dbUri = new URI(System.getenv("DATABASE_URL"));
-            log.trace("Connecting to " + dbUri);
-
-            String username = dbUri.getUserInfo().split(":")[0];
-            String password = dbUri.getUserInfo().split(":")[1];
-            String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
-
-            this.conn = DriverManager.getConnection(dbUrl, username, password);
-        } catch (SQLException | URISyntaxException e) {
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            this.conn = DriverManager.getConnection(dbUrl);
+        } catch (SQLException e) {
             throw new IllegalStateException("Database issue " + e.getMessage());
         }
     }
