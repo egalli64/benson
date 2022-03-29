@@ -23,10 +23,9 @@ public class UserDao implements AutoCloseable {
     private Connection conn;
 
     public UserDao() {
-        log.trace("called");
-
         try {
             URI dbUri = new URI(System.getenv("DATABASE_URL"));
+            log.trace(dbUri);
 
             String username = dbUri.getUserInfo().split(":")[0];
             String password = dbUri.getUserInfo().split(":")[1];
