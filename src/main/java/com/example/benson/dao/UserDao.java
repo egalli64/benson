@@ -13,6 +13,14 @@ import org.apache.logging.log4j.Logger;
 import com.example.benson.bean.User;
 
 public class UserDao implements AutoCloseable {
+    static {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new IllegalStateException("Database issue " + e.getMessage());
+        }
+    }
+
     private static final Logger log = LogManager.getLogger(UserDao.class);
     private static final String GET_BY_NAME_AND_PASSWORD = """
             SELECT user_id, administrator
@@ -24,7 +32,7 @@ public class UserDao implements AutoCloseable {
         try {
             String dbUrl = System.getenv("JDBC_DATABASE_URL");
             this.conn = DriverManager.getConnection(dbUrl);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new IllegalStateException("Database issue " + e.getMessage());
         }
     }
