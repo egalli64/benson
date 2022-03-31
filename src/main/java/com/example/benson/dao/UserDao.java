@@ -10,8 +10,6 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.example.benson.bean.User;
-
 public class UserDao implements AutoCloseable {
     static {
         try {
@@ -54,6 +52,10 @@ public class UserDao implements AutoCloseable {
             log.error("Can't get user: " + se.getMessage());
             throw new IllegalStateException("Database issue " + se.getMessage());
         }
+    }
+
+    public void save(User user) {
+        log.trace("Not yet implemented");
     }
 
     @Override

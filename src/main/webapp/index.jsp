@@ -10,8 +10,8 @@
         <ul>
             <c:choose>
                 <c:when test="${user eq null}">
-                    <li><a href="login.jsp">Login</a></li>
-                    <li><a href="register.jsp">Register</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
                 </c:when>
                 <c:otherwise>
                     <li>Welcome, ${user.name}!</li>

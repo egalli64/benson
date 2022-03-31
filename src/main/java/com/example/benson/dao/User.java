@@ -1,4 +1,4 @@
-package com.example.benson.bean;
+package com.example.benson.dao;
 
 public class User {
     private int id;
