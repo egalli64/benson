@@ -9,7 +9,7 @@ create schema benson;
 
 create table benson.user (
 	user_id serial primary key,
-	name text,
+	name text unique,
 	password text,
 	administrator boolean
 );

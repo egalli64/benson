@@ -28,7 +28,11 @@ public class Register extends HttpServlet {
         if (name != null && !name.isBlank() && password != null && !password.isEmpty()) {
             User user = new User(name, password);
             try (UserDao dao = new UserDao()) {
-                dao.save(user);
+                if (!dao.save(user)) {
+                    request.setAttribute("user", user);
+                    request.getRequestDispatcher("/register.jsp").forward(request, response);
+                    return;
+                }
             }
         }
 

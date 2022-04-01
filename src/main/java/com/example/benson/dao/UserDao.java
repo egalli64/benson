@@ -24,6 +24,8 @@ public class UserDao implements AutoCloseable {
             SELECT user_id, administrator
             FROM benson.user
             WHERE name = ? AND password =?""";
+    private static final String SAVE = "INSERT INTO benson.user (name, password, administrator) VALUES (?, ?, ?)";
+
     private Connection conn;
 
     public UserDao() {
@@ -54,8 +56,21 @@ public class UserDao implements AutoCloseable {
         }
     }
 
-    public void save(User user) {
-        log.trace("Not yet implemented");
+    public boolean save(User user) {
+        try (PreparedStatement ps = conn.prepareStatement(SAVE)) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getPassword());
+            ps.setBoolean(3, false);
+            if (ps.executeUpdate() == 1) {
+                log.trace(String.format("User %s saved", user.getName()));
+                return true;
+            } else {
+                log.error("Can't save user " + user.getName());
+            }
+        } catch (SQLException se) {
+            log.error(se.getMessage());
+        }
+        return false;
     }
 
     @Override
