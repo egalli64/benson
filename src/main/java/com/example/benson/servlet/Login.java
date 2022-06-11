@@ -1,6 +1,8 @@
 package com.example.benson.servlet;
 
 import java.io.IOException;
+import java.util.Optional;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,12 +25,20 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
+        log.trace("Login request for '" + name + "'");
 
+        String url = "index.jsp";
         try (UserDao dao = new UserDao()) {
-            User user = dao.getUser(name, password);
-            request.getSession().setAttribute("user", user);
-            log.trace("Logged as " + user.getName());
+            Optional<User> user = dao.getUser(name, password);
+            if (user.isPresent()) {
+                request.getSession().setAttribute("user", user.get());
+                log.trace("Login accepted");
+            } else {
+                // ask again
+                request.setAttribute("wrong", name);
+                url = "login.jsp";
+            }
         }
-        request.getRequestDispatcher("/").forward(request, response);
+        request.getRequestDispatcher(url).forward(request, response);
     }
 }

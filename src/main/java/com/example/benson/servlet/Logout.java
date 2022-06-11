@@ -21,7 +21,7 @@ public class Logout extends HttpServlet {
             throws ServletException, IOException {
         log.traceEntry();
 
-        request.getSession().setAttribute("user", null);
+        request.getSession().invalidate();
         request.getRequestDispatcher("/").forward(request, response);
     }
 }
