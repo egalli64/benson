@@ -4,13 +4,14 @@
 <html>
 <head>
 <title>Benson</title>
+<link rel="icon" href="data:;base64,=">
 </head>
 <body>
     <nav>
         <ul>
             <c:choose>
                 <c:when test="${user eq null}">
-                    <li><a href="login.html">Login</a></li>
+                    <li><a href="login.jsp">Login</a></li>
                     <li><a href="register.jsp">Register</a></li>
                 </c:when>
                 <c:otherwise>
