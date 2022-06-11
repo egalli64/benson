@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,7 +38,7 @@ public class UserDao implements AutoCloseable {
         }
     }
 
-    public User getUser(String name, String password) {
+    public Optional<User> getUser(String name, String password) {
         log.traceEntry();
 
         try (PreparedStatement ps = conn.prepareStatement(GET_BY_NAME_AND_PASSWORD)) {
@@ -45,9 +46,9 @@ public class UserDao implements AutoCloseable {
             ps.setString(2, password);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return new User(rs.getInt(1), name, password, rs.getBoolean(2));
+                    return Optional.of(new User(rs.getInt(1), name, password, rs.getBoolean(2)));
                 } else {
-                    return new User(0, "guest", null, false);
+                    return Optional.empty();
                 }
             }
         } catch (SQLException se) {
