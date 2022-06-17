@@ -10,6 +10,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
     crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container-fluid">
@@ -28,6 +31,44 @@
             </ul>
         </nav>
         <h1>The Benson Project</h1>
+        <c:if test="${user.administrator}">
+            <h2>You are logged as administrator!</h2>
+        </c:if>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item">
+                            <a href="https://www.w3.org/" target="_blank">
+                                <img src="img/w3c.png" class="d-block w-100" alt="W3C">
+                            </a>
+                        </div>
+                        <div class="carousel-item active">
+                            <a href="https://tomcat.apache.org/" target="_blank">
+                                <img src="img/tomcat.jpg" class="d-block w-100" alt="Apache Tomcat">
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://www.oracle.com/it/java/technologies/java-ee-glance.html" target="_blank">
+                                <img src="img/java-ee.png" class="d-block w-100" alt="Java EE">
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://www.postgresql.org/" target="_blank">
+                                <img src="img/postgresql.png" class="d-block w-100" alt="PostgreSQL">
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://getbootstrap.com/" target="_blank">
+                                <img src="img/bootstrap.svg" class="d-block w-100" alt="Bootstrap">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4"></div>
+        </div>
     </div>
 </body>
 </html>
