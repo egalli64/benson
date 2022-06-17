@@ -20,12 +20,12 @@
             <ul class="nav justify-content-end">
                 <c:choose>
                     <c:when test="${user eq null}">
-                        <li class="nav-link"><a href="login.jsp">Login</a></li>
-                        <li class="nav-link"><a href="register.jsp">Register</a></li>
+                        <li class="nav-link"><a href="/benson/login.jsp">Login</a></li>
+                        <li class="nav-link"><a href="/benson/register.jsp">Register</a></li>
                     </c:when>
                     <c:otherwise>
                         <li class="nav-link">Welcome, ${user.name}!</li>
-                        <li class="nav-link"><a href="logout">Logout</a></li>
+                        <li class="nav-link"><a href="/benson/logout">Logout</a></li>
                     </c:otherwise>
                 </c:choose>
             </ul>
@@ -41,32 +41,32 @@
                     <div class="carousel-inner">
                         <div class="carousel-item">
                             <a href="https://www.w3.org/" target="_blank">
-                                <img src="img/w3c.png" class="d-block w-100" alt="W3C">
+                                <img src="/benson/img/w3c.png" class="d-block w-100" alt="W3C">
                             </a>
                         </div>
                         <div class="carousel-item active">
                             <a href="https://tomcat.apache.org/" target="_blank">
-                                <img src="img/tomcat.jpg" class="d-block w-100" alt="Apache Tomcat">
+                                <img src="/benson/img/tomcat.jpg" class="d-block w-100" alt="Apache Tomcat">
                             </a>
                         </div>
                         <div class="carousel-item">
                             <a href="https://www.oracle.com/it/java/technologies/java-ee-glance.html" target="_blank">
-                                <img src="img/java-ee.png" class="d-block w-100" alt="Java EE">
+                                <img src="/benson/img/java-ee.png" class="d-block w-100" alt="Java EE">
                             </a>
                         </div>
                         <div class="carousel-item">
                             <a href="https://www.postgresql.org/" target="_blank">
-                                <img src="img/postgresql.png" class="d-block w-100" alt="PostgreSQL">
+                                <img src="/benson/img/postgresql.png" class="d-block w-100" alt="PostgreSQL">
                             </a>
                         </div>
                         <div class="carousel-item">
                             <a href="https://getbootstrap.com/" target="_blank">
-                                <img src="img/bootstrap.svg" class="d-block w-100" alt="Bootstrap">
+                                <img src="/benson/img/bootstrap.svg" class="d-block w-100" alt="Bootstrap">
                             </a>
                         </div>
                         <div class="carousel-item">
                             <a href="https://www.heroku.com/" target="_blank">
-                                <img src="img/heroku.jpg" class="d-block w-100" alt="Heroku">
+                                <img src="/benson/img/heroku.jpg" class="d-block w-100" alt="Heroku">
                             </a>
                         </div>
                     </div>

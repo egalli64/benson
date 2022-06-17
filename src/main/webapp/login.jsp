@@ -22,7 +22,7 @@
         <c:if test="${user eq null and wrong ne null}">
             <p>Wrong user name or password.</p>
         </c:if>
-        <form action="login" method="post">
+        <form action="/benson/login" method="post">
             <input name="name" placeholder="User name" value="${wrong}" required>
             <input type="password" name="password" placeholder="Password" required>
             <button>Login</button>

@@ -22,7 +22,7 @@
         <c:if test="${user ne null}">
             <p>User ${user.name} registration failed!</p>
         </c:if>
-        <form action="register" method="post">
+        <form action="/benson/register" method="post">
             <input name="name" placeholder="User name" value="${user.name}" required>
             <input type="password" name="password" placeholder="Password" required>
             <button>Register</button>
