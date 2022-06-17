@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-4"></div>
             <div class="col-4">
-                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="1000">
                     <div class="carousel-inner">
                         <div class="carousel-item">
                             <a href="https://www.w3.org/" target="_blank">
@@ -62,6 +62,11 @@
                         <div class="carousel-item">
                             <a href="https://getbootstrap.com/" target="_blank">
                                 <img src="img/bootstrap.svg" class="d-block w-100" alt="Bootstrap">
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://www.heroku.com/" target="_blank">
+                                <img src="img/heroku.jpg" class="d-block w-100" alt="Heroku">
                             </a>
                         </div>
                     </div>
