@@ -31,8 +31,12 @@ public class Login extends HttpServlet {
         try (UserDao dao = new UserDao()) {
             Optional<User> user = dao.getUser(name, password);
             if (user.isPresent()) {
-                request.getSession().setAttribute("user", user.get());
-                log.trace("Login accepted");
+                User logged = user.get();
+                if (logged.isAdministrator()) {
+                    url = "/admin/";
+                }
+                request.getSession().setAttribute("user", logged);
+                log.trace("Accepted");
             } else {
                 // ask again
                 request.setAttribute("wrong", name);
