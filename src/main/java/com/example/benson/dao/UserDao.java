@@ -6,6 +6,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +28,12 @@ public class UserDao implements AutoCloseable {
             SELECT user_id, administrator
             FROM benson.user
             WHERE name = ? AND password =?""";
-    private static final String SAVE = "INSERT INTO benson.user (name, password, administrator) VALUES (?, ?, ?)";
+    private static final String SAVE = """
+            INSERT INTO benson.user (name, password, administrator)
+                VALUES (?, ?, ?)""";
+    private static final String GET_ALL = """
+            SELECT user_id, name, password, administrator
+            FROM benson.user""";
 
     private Connection conn;
 
@@ -72,6 +80,18 @@ public class UserDao implements AutoCloseable {
             log.error(se.getMessage());
         }
         return false;
+    }
+
+    public List<User> getAll() {
+        List<User> result = new ArrayList<User>();
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(GET_ALL)) {
+            while (rs.next()) {
+                result.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
+            }
+        } catch (SQLException se) {
+            log.error(se.getMessage());
+        }
+        return result;
     }
 
     @Override

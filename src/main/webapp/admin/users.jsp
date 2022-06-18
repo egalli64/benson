@@ -19,8 +19,8 @@
                 <li class="nav-link"><a href="/benson/logout">Logout</a></li>
             </ul>
         </nav>
-        <h1>Benson Administration</h1>
-        <p><a href="/benson/admin/user/all">List all users</a><p>
+        <h1>User List</h1>
+        <p>${users}</p>
     </div>
 </body>
 </html>
