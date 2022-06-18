@@ -28,9 +28,13 @@ public class UserDao implements AutoCloseable {
             SELECT user_id, administrator
             FROM benson.user
             WHERE name = ? AND password =?""";
-    private static final String SAVE = """
+    private static final String CREATE = """
             INSERT INTO benson.user (name, password, administrator)
                 VALUES (?, ?, ?)""";
+    private static final String UPDATE_PASSWORD_BY_ID = """
+            UPDATE benson.user
+            SET password = ?
+            WHERE user_id = ?""";
     private static final String GET_ALL = """
             SELECT user_id, name, password, administrator
             FROM benson.user""";
@@ -65,8 +69,8 @@ public class UserDao implements AutoCloseable {
         }
     }
 
-    public boolean save(User user) {
-        try (PreparedStatement ps = conn.prepareStatement(SAVE)) {
+    public boolean create(User user) {
+        try (PreparedStatement ps = conn.prepareStatement(CREATE)) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getPassword());
             ps.setBoolean(3, false);
@@ -75,6 +79,22 @@ public class UserDao implements AutoCloseable {
                 return true;
             } else {
                 log.error("Can't save user " + user.getName());
+            }
+        } catch (SQLException se) {
+            log.error(se.getMessage());
+        }
+        return false;
+    }
+
+    public boolean updatePasswordById(String password, int id) {
+        try (PreparedStatement ps = conn.prepareStatement(UPDATE_PASSWORD_BY_ID)) {
+            ps.setString(1, password);
+            ps.setInt(2, id);
+            if (ps.executeUpdate() == 1) {
+                log.trace(String.format("User %d password updated", id));
+                return true;
+            } else {
+                log.error("Can't update password for user " + id);
             }
         } catch (SQLException se) {
             log.error(se.getMessage());

@@ -24,7 +24,9 @@
                         <li class="nav-link"><a href="/benson/register.jsp">Register</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="nav-link">Welcome, ${user.name}!</li>
+                        <li class="nav-link">Welcome,
+                            <a href="/benson/user/changePwd.jsp">${user.name}</a>!
+                        </li>
                         <li class="nav-link"><a href="/benson/logout">Logout</a></li>
                     </c:otherwise>
                 </c:choose>
@@ -33,6 +35,9 @@
         <h1>The Benson Project</h1>
         <c:if test="${user.administrator}">
             <h2>You are logged as administrator!</h2>
+        </c:if>
+        <c:if test="${message ne null}">
+            <p>${message}</p>
         </c:if>
         <div class="row">
             <div class="col-4"></div>

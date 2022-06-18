@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login to Benson</title>
+<title>Change password</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:;base64,=">
@@ -15,18 +15,18 @@
     <div class="container-fluid">
         <nav>
             <ul class="nav justify-content-end">
-                <li class="nav-link"><a href="index.jsp">Home</a></li>
-                <li class="nav-link"><a href="register.jsp">Register</a></li>
+                <li class="nav-link"><a href="/benson/index.jsp">Home</a></li>
             </ul>
         </nav>
-        <h1>Login to Benson</h1>
-        <c:if test="${user eq null and wrong ne null}">
-            <p>Wrong user name or password.</p>
+        <h1>Change password</h1>
+        <c:if test="${wrong ne null}">
+            <p>${wrong}</p>
         </c:if>
-        <form action="/benson/login" method="post">
-            <input name="name" placeholder="User name" value="${wrong}" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button>Login</button>
+        <form action="/benson/user/changePwd" method="post">
+            <input value="${user.name}" readonly>
+            <input type="password" name="current" placeholder="Current password" required autofocus>
+            <input type="password" name="password" placeholder="New password" required>
+            <button>Change</button>
         </form>
     </div>
 </body>
