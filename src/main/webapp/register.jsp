@@ -19,11 +19,12 @@
                 <li class="nav-link"><a href="login.html">Login</a></li>
             </ul>
         </nav>
-        <c:if test="${user ne null}">
-            <p>User ${user.name} registration failed!</p>
+        <h1>Register new user</h1>
+        <c:if test="${wrong ne null}">
+            <p>User ${wrong} registration failed!</p>
         </c:if>
         <form action="/benson/register" method="post">
-            <input name="name" placeholder="User name" value="${user.name}" required>
+            <input name="name" placeholder="User name" value="${wrong}" required>
             <input type="password" name="password" placeholder="Password" required>
             <button>Register</button>
         </form>
