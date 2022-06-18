@@ -26,23 +26,23 @@ public class ChangePassword extends HttpServlet {
         String current = request.getParameter("current");
         String password = request.getParameter("password");
 
+        String url = "changePwd.jsp";
         User user = (User) request.getSession().getAttribute("user");
 
-        String url = "changePwd.jsp";
         if (user.getPassword().equals(current)) {
             try (UserDao dao = new UserDao()) {
-                if (!dao.updatePasswordById(password, user.getId())) {
-                    request.setAttribute("wrong", "Can't save new password");
-                } else {
+                if (dao.updatePasswordById(password, user.getId())) {
+                    user.setPassword(password);
+                    request.setAttribute("message", "Password correctly changed");
                     url = "/index.jsp";
+                } else {
+                    request.setAttribute("wrong", "Can't save new password");
                 }
             }
-            user.setPassword(password);
         } else {
-            request.setAttribute("wrong", "Wrong password");            
+            request.setAttribute("wrong", "Wrong password");
         }
 
-        request.setAttribute("message", "Password correctly changed");
         request.getRequestDispatcher(url).forward(request, response);
     }
 }
