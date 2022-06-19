@@ -24,6 +24,9 @@ public class UserDao implements AutoCloseable {
     }
 
     private static final Logger log = LogManager.getLogger(UserDao.class);
+    private static final String GET_ALL = """
+            SELECT user_id, name, password, administrator
+            FROM benson.user""";
     private static final String GET_BY_NAME_AND_PASSWORD = """
             SELECT user_id, administrator
             FROM benson.user
@@ -35,9 +38,9 @@ public class UserDao implements AutoCloseable {
             UPDATE benson.user
             SET password = ?
             WHERE user_id = ?""";
-    private static final String GET_ALL = """
-            SELECT user_id, name, password, administrator
-            FROM benson.user""";
+    private static final String DELETE_BY_ID = """
+            DELETE FROM benson.user
+            WHERE user_id = ?""";
 
     private Connection conn;
 
@@ -95,6 +98,21 @@ public class UserDao implements AutoCloseable {
                 return true;
             } else {
                 log.error("Can't update password for user " + id);
+            }
+        } catch (SQLException se) {
+            log.error(se.getMessage());
+        }
+        return false;
+    }
+
+    public boolean deleteById(int id) {
+        try (PreparedStatement ps = conn.prepareStatement(DELETE_BY_ID)) {
+            ps.setInt(1, id);
+            if (ps.executeUpdate() == 1) {
+                log.trace(String.format("User %d deleted", id));
+                return true;
+            } else {
+                log.error("Can't delete user " + id);
             }
         } catch (SQLException se) {
             log.error(se.getMessage());

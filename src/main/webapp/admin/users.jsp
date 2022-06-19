@@ -37,8 +37,8 @@
                         <td>${cur.name}</td>
                         <td><c:if test="${cur.administrator}">&check;</c:if></td>
                         <td>
-                            <a href="/benson/user/delete?id=${cur.id}"><button type="button" class="btn btn-danger" title="delete ${cur.name}">&cross;</button></a>
-                            <a href="/benson/admin/edit?id=${cur.id}"><button type="button" class="btn btn-info" title="edit ${cur.name}">&easter;</button></a>
+                            <a href="/benson/admin/user/delete?id=${cur.id}"><button type="button" class="btn btn-danger" title="delete ${cur.name}">&cross;</button></a>
+                            <a href="/benson/admin/user/edit?id=${cur.id}"><button type="button" class="btn btn-info" title="edit ${cur.name}">&easter;</button></a>
                         </td>
                     </tr>
                 </c:if>

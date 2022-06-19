@@ -20,7 +20,12 @@
             </ul>
         </nav>
         <h1>Benson Administration</h1>
-        <p><a href="/benson/admin/user/all">List all users</a><p>
+        <c:if test="${message ne null}">
+            <p>${message}</p>
+        </c:if>
+        <p>
+            <a href="/benson/admin/user/all">List all users</a>
+        <p>
     </div>
 </body>
 </html>
