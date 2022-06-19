@@ -35,6 +35,7 @@
         <h1>The Benson Project</h1>
         <c:if test="${user.administrator}">
             <h2>You are logged as administrator!</h2>
+            <p>Go to the <a href="/benson/admin/index.jsp">administration</a> home page</p>
         </c:if>
         <c:if test="${message ne null}">
             <p>${message}</p>

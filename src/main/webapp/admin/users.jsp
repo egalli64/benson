@@ -15,12 +15,35 @@
     <div class="container-fluid">
         <nav>
             <ul class="nav justify-content-end">
-                <li class="nav-link">${user.name}</li>
+                <li class="nav-link"><a href="/benson/admin/index.jsp">Administration</a></li>
+                <li class="nav-link"><a href="/benson/user/changePwd.jsp">${user.name}</a></li>
                 <li class="nav-link"><a href="/benson/logout">Logout</a></li>
             </ul>
         </nav>
-        <h1>User List</h1>
-        <p>${users}</p>
+        <h1>The (other) Benson users</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Administrator</th>
+                    <th scope="col">Commands</th>
+                </tr>
+            </thead>
+            <c:forEach var="cur" items="${users}">
+                <c:if test="${cur.id ne user.id}">
+                    <tr>
+                        <td>${cur.id}</td>
+                        <td>${cur.name}</td>
+                        <td><c:if test="${cur.administrator}">&check;</c:if></td>
+                        <td>
+                            <a href="/benson/user/delete?id=${cur.id}"><button type="button" class="btn btn-danger" title="delete ${cur.name}">&cross;</button></a>
+                            <a href="/benson/admin/edit?id=${cur.id}"><button type="button" class="btn btn-info" title="edit ${cur.name}">&easter;</button></a>
+                        </td>
+                    </tr>
+                </c:if>
+            </c:forEach>
+        </table>
     </div>
 </body>
 </html>

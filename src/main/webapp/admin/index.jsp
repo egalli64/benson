@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <nav>
             <ul class="nav justify-content-end">
-                <li class="nav-link">${user.name}</li>
+                <li class="nav-link"><a href="/benson/user/changePwd.jsp">${user.name}</a></li>
                 <li class="nav-link"><a href="/benson/logout">Logout</a></li>
             </ul>
         </nav>
