@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.example.benson.dao.User;
 import com.example.benson.dao.UserDao;
+import com.example.benson.logic.SimpleCrypto;
 
 @SuppressWarnings("serial")
 @WebServlet("/register")
@@ -26,7 +27,7 @@ public class Register extends HttpServlet {
         log.trace(name);
 
         if (name != null && !name.isBlank() && password != null && !password.isEmpty()) {
-            User user = new User(name, password);
+            User user = new User(name, SimpleCrypto.encrypt(password));
             try (UserDao dao = new UserDao()) {
                 if (!dao.create(user)) {
                     request.setAttribute("wrong", name);

@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.example.benson.dao.User;
 import com.example.benson.dao.UserDao;
+import com.example.benson.logic.SimpleCrypto;
 
 @SuppressWarnings("serial")
 @WebServlet("/login")
@@ -29,7 +30,7 @@ public class Login extends HttpServlet {
 
         String url = "index.jsp";
         try (UserDao dao = new UserDao()) {
-            Optional<User> user = dao.getUser(name, password);
+            Optional<User> user = dao.getUser(name, SimpleCrypto.encrypt(password));
             if (user.isPresent()) {
                 User logged = user.get();
                 if (logged.isAdministrator()) {

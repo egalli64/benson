@@ -14,5 +14,5 @@ create table benson.user (
 	administrator boolean not null
 );
 
-insert into benson.user (name, password, administrator) values('root', 'password', true);
-insert into benson.user (name, password, administrator) values('guest', 'guest', false);
+insert into benson.user (name, password, administrator) values('root', 'il46qnBMTuYj+q8NE9OI5Q==', true);
+insert into benson.user (name, password, administrator) values('guest', 'RhrUE1U/mdh4TYGk/E35fA==', false);
