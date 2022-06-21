@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="ctx" scope="page" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,14 +22,13 @@
             <ul class="nav justify-content-end">
                 <c:choose>
                     <c:when test="${user eq null}">
-                        <li class="nav-link"><a href="/benson/login.jsp">Login</a></li>
-                        <li class="nav-link"><a href="/benson/register.jsp">Register</a></li>
+                        <li class="nav-link"><a href="${ctx}/login.jsp">Login</a></li>
+                        <li class="nav-link"><a href="${ctx}/register.jsp">Register</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="nav-link">Welcome,
-                            <a href="/benson/user/changePwd.jsp">${user.name}</a>!
+                        <li class="nav-link">Welcome, <a href="${ctx}/user/changePwd.jsp">${user.name}</a>!
                         </li>
-                        <li class="nav-link"><a href="/benson/logout">Logout</a></li>
+                        <li class="nav-link"><a href="${ctx}/logout">Logout</a></li>
                     </c:otherwise>
                 </c:choose>
             </ul>
@@ -35,7 +36,9 @@
         <h1>The Benson Project</h1>
         <c:if test="${user.administrator}">
             <h2>You are logged as administrator!</h2>
-            <p>Go to the <a href="/benson/admin/index.jsp">administration</a> home page</p>
+            <p>
+                Go to the <a href="${ctx}/admin/index.jsp">administration</a> home page
+            </p>
         </c:if>
         <c:if test="${message ne null}">
             <p>${message}</p>
@@ -46,33 +49,34 @@
                 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="1000">
                     <div class="carousel-inner">
                         <div class="carousel-item">
-                            <a href="https://www.w3.org/" target="_blank">
-                                <img src="/benson/img/w3c.png" class="d-block w-100" alt="W3C">
+                            <a href="https://www.w3.org/" target="_blank"> <img src="${ctx}/img/w3c.png"
+                                class="d-block w-100" alt="W3C">
                             </a>
                         </div>
                         <div class="carousel-item active">
-                            <a href="https://tomcat.apache.org/" target="_blank">
-                                <img src="/benson/img/tomcat.jpg" class="d-block w-100" alt="Apache Tomcat">
+                            <a href="https://tomcat.apache.org/" target="_blank"> <img
+                                src="${ctx}/img/tomcat.jpg" class="d-block w-100" alt="Apache Tomcat">
                             </a>
                         </div>
                         <div class="carousel-item">
-                            <a href="https://www.oracle.com/it/java/technologies/java-ee-glance.html" target="_blank">
-                                <img src="/benson/img/java-ee.png" class="d-block w-100" alt="Java EE">
+                            <a href="https://www.oracle.com/it/java/technologies/java-ee-glance.html"
+                                target="_blank"> <img src="${ctx}/img/java-ee.png" class="d-block w-100"
+                                alt="Java EE">
                             </a>
                         </div>
                         <div class="carousel-item">
-                            <a href="https://www.postgresql.org/" target="_blank">
-                                <img src="/benson/img/postgresql.png" class="d-block w-100" alt="PostgreSQL">
+                            <a href="https://www.postgresql.org/" target="_blank"> <img
+                                src="${ctx}/img/postgresql.png" class="d-block w-100" alt="PostgreSQL">
                             </a>
                         </div>
                         <div class="carousel-item">
-                            <a href="https://getbootstrap.com/" target="_blank">
-                                <img src="/benson/img/bootstrap.svg" class="d-block w-100" alt="Bootstrap">
+                            <a href="https://getbootstrap.com/" target="_blank"> <img
+                                src="${ctx}/img/bootstrap.svg" class="d-block w-100" alt="Bootstrap">
                             </a>
                         </div>
                         <div class="carousel-item">
-                            <a href="https://www.heroku.com/" target="_blank">
-                                <img src="/benson/img/heroku.jpg" class="d-block w-100" alt="Heroku">
+                            <a href="https://www.heroku.com/" target="_blank"> <img
+                                src="${ctx}/img/heroku.jpg" class="d-block w-100" alt="Heroku">
                             </a>
                         </div>
                     </div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="ctx" scope="page" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +17,9 @@
     <div class="container-fluid">
         <nav>
             <ul class="nav justify-content-end">
-                <li class="nav-link"><a href="/benson/admin/index.jsp">Administration</a></li>
-                <li class="nav-link"><a href="/benson/user/changePwd.jsp">${user.name}</a></li>
-                <li class="nav-link"><a href="/benson/logout">Logout</a></li>
+                <li class="nav-link"><a href="${ctx}/admin/index.jsp">Administration</a></li>
+                <li class="nav-link"><a href="${ctx}/user/changePwd.jsp">${user.name}</a></li>
+                <li class="nav-link"><a href="${ctx}/logout">Logout</a></li>
             </ul>
         </nav>
         <h1>The (other) Benson users</h1>
@@ -37,8 +39,8 @@
                         <td>${cur.name}</td>
                         <td><c:if test="${cur.administrator}">&check;</c:if></td>
                         <td>
-                            <a href="/benson/admin/user/delete?id=${cur.id}"><button type="button" class="btn btn-danger" title="delete ${cur.name}">&#x02717;</button></a>
-                            <a href="/benson/admin/user/edit?id=${cur.id}"><button type="button" class="btn btn-info" title="edit ${cur.name}">&#x02A6D;</button></a>
+                            <a href="${ctx}/admin/user/delete?id=${cur.id}"><button type="button" class="btn btn-danger" title="delete ${cur.name}">&#x02717;</button></a>
+                            <a href="${ctx}/admin/user/edit?id=${cur.id}"><button type="button" class="btn btn-info" title="edit ${cur.name}">&#x02A6D;</button></a>
                         </td>
                     </tr>
                 </c:if>

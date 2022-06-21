@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="ctx" scope="page" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +25,7 @@
         <c:if test="${wrong ne null}">
             <p>User ${wrong} registration failed!</p>
         </c:if>
-        <form action="/benson/register" method="post">
+        <form action="${ctx}/register" method="post">
             <input name="name" placeholder="User name" value="${wrong}" required>
             <input type="password" name="password" placeholder="Password" required>
             <button>Register</button>

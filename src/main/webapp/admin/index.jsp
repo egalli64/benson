@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="ctx" scope="page" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +17,8 @@
     <div class="container-fluid">
         <nav>
             <ul class="nav justify-content-end">
-                <li class="nav-link"><a href="/benson/user/changePwd.jsp">${user.name}</a></li>
-                <li class="nav-link"><a href="/benson/logout">Logout</a></li>
+                <li class="nav-link"><a href="${ctx}/user/changePwd.jsp">${user.name}</a></li>
+                <li class="nav-link"><a href="${ctx}/logout">Logout</a></li>
             </ul>
         </nav>
         <h1>Benson Administration</h1>
@@ -24,7 +26,7 @@
             <p>${message}</p>
         </c:if>
         <p>
-            <a href="/benson/admin/user/all">List all users</a>
+            <a href="${ctx}/admin/user/all">List all users</a>
         <p>
     </div>
 </body>
