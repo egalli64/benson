@@ -30,7 +30,7 @@ public class Login extends HttpServlet {
 
         String url = "index.jsp";
         try (UserDao dao = new UserDao()) {
-            Optional<User> user = dao.getUser(name, SimpleCrypto.encrypt(password));
+            Optional<User> user = dao.get(name, SimpleCrypto.encrypt(password));
             if (user.isPresent()) {
                 User logged = user.get();
                 if (logged.isAdministrator()) {

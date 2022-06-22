@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="ctx" scope="page" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,14 +17,14 @@
     <div class="container-fluid">
         <nav>
             <ul class="nav justify-content-end">
-                <li class="nav-link"><a href="/benson/index.jsp">Home</a></li>
+                <li class="nav-link"><a href="${ctx}/index.jsp">Home</a></li>
             </ul>
         </nav>
         <h1>Change password</h1>
         <c:if test="${wrong ne null}">
             <p>${wrong}</p>
         </c:if>
-        <form action="/benson/user/changePwd" method="post">
+        <form action="${ctx}/user/changePwd" method="post">
             <input value="${user.name}" readonly>
             <input type="password" name="current" placeholder="Current password" required autofocus>
             <input type="password" name="password" placeholder="New password" required>

@@ -31,6 +31,10 @@ public class UserDao implements AutoCloseable {
             SELECT user_id, administrator
             FROM benson.user
             WHERE name = ? AND password =?""";
+    private static final String GET_BY_ID = """
+            SELECT name, password, administrator
+            FROM benson.user
+            WHERE user_id = ?""";
     private static final String CREATE = """
             INSERT INTO benson.user (name, password, administrator)
                 VALUES (?, ?, ?)""";
@@ -53,7 +57,7 @@ public class UserDao implements AutoCloseable {
         }
     }
 
-    public Optional<User> getUser(String name, String password) {
+    public Optional<User> get(String name, String password) {
         log.traceEntry();
 
         try (PreparedStatement ps = conn.prepareStatement(GET_BY_NAME_AND_PASSWORD)) {
@@ -62,6 +66,24 @@ public class UserDao implements AutoCloseable {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     return Optional.of(new User(rs.getInt(1), name, password, rs.getBoolean(2)));
+                } else {
+                    return Optional.empty();
+                }
+            }
+        } catch (SQLException se) {
+            log.error("Can't get user: " + se.getMessage());
+            throw new IllegalStateException("Database issue " + se.getMessage());
+        }
+    }
+
+    public Optional<User> get(int id) {
+        log.traceEntry();
+
+        try (PreparedStatement ps = conn.prepareStatement(GET_BY_ID)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return Optional.of(new User(id, rs.getString(1), rs.getString(2), rs.getBoolean(3)));
                 } else {
                     return Optional.empty();
                 }
