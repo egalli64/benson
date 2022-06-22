@@ -38,6 +38,10 @@ public class UserDao implements AutoCloseable {
     private static final String CREATE = """
             INSERT INTO benson.user (name, password, administrator)
                 VALUES (?, ?, ?)""";
+    private static final String UPDATE = """
+            UPDATE benson.user
+            SET name = ?, password = ?, administrator = ?
+            WHERE user_id = ?""";
     private static final String UPDATE_PASSWORD_BY_ID = """
             UPDATE benson.user
             SET password = ?
@@ -104,6 +108,24 @@ public class UserDao implements AutoCloseable {
                 return true;
             } else {
                 log.error("Can't save user " + user.getName());
+            }
+        } catch (SQLException se) {
+            log.error(se.getMessage());
+        }
+        return false;
+    }
+
+    public boolean update(User user) {
+        try (PreparedStatement ps = conn.prepareStatement(UPDATE)) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getPassword());
+            ps.setBoolean(3, user.isAdministrator());
+            ps.setInt(4, user.getId());
+            if (ps.executeUpdate() == 1) {
+                log.trace(String.format("User %d updated", user.getId()));
+                return true;
+            } else {
+                log.error("Can't update password for user " + user.getId());
             }
         } catch (SQLException se) {
             log.error(se.getMessage());

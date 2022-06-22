@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="ctx" scope="page" value="${pageContext.request.contextPath}"/>
+<c:set var="ctx" scope="page" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html>
@@ -38,10 +38,10 @@
                         <td>${cur.id}</td>
                         <td>${cur.name}</td>
                         <td><c:if test="${cur.administrator}">&check;</c:if></td>
-                        <td>
-                            <a href="${ctx}/admin/user/delete?id=${cur.id}"><button type="button" class="btn btn-danger" title="delete ${cur.name}">&#x02717;</button></a>
-                            <a href="${ctx}/admin/user/edit?id=${cur.id}"><button type="button" class="btn btn-info" title="edit ${cur.name}">&#x02A6D;</button></a>
-                        </td>
+                        <td><a href="${ctx}/admin/user/delete?id=${cur.id}"><button type="button"
+                                    class="btn btn-danger" title="delete ${cur.name}">&#x02717;</button></a> <a
+                            href="${ctx}/admin/user/edit?id=${cur.id}"><button type="button"
+                                    class="btn btn-info" title="edit ${cur.name}">&#x02A6D;</button></a></td>
                     </tr>
                 </c:if>
             </c:forEach>

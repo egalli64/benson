@@ -21,10 +21,7 @@
             </ul>
         </nav>
         <h1>Change User Data</h1>
-        <p>The inserted fields will be updated (when possible)</p>
-        <c:if test="${wrong ne null}">
-            <p>${wrong}</p>
-        </c:if>
+        <p>Only the inserted fields will be updated (when possible)</p>
         <form action="${ctx}/admin/user/update" method="post">
             <div>
                 <label>Id <input name="id" value="${current.id}" readonly></label>
