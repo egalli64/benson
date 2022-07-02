@@ -1,5 +1,5 @@
 # benson
-A sample Java EE web app running on Heroku as https://egalli64-benson.herokuapp.com/
+A sample Java EE web app running on Heroku as https://benson-jee.herokuapp.com/
 
 - Java 17
 - Tomcat 9
