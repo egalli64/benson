@@ -17,8 +17,8 @@
     <div class="container-fluid">
         <nav>
             <ul class="nav justify-content-end">
-                <li class="nav-link"><a href="index.jsp">Home</a></li>
-                <li class="nav-link"><a href="login.html">Login</a></li>
+                <li class="nav-link"><a href="${ctx}/index.jsp">Home</a></li>
+                <li class="nav-link"><a href="${ctx}/login.html">Login</a></li>
             </ul>
         </nav>
         <h1>Register new user</h1>
@@ -26,7 +26,7 @@
             <p>User ${wrong} registration failed!</p>
         </c:if>
         <form action="${ctx}/register" method="post">
-            <input name="name" placeholder="User name" value="${wrong}" required>
+            <input name="name" placeholder="User name" value="${wrong}" autofocus required>
             <input type="password" name="password" placeholder="Password" required>
             <button>Register</button>
         </form>

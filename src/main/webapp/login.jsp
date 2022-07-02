@@ -17,8 +17,8 @@
     <div class="container-fluid">
         <nav>
             <ul class="nav justify-content-end">
-                <li class="nav-link"><a href="index.jsp">Home</a></li>
-                <li class="nav-link"><a href="register.jsp">Register</a></li>
+                <li class="nav-link"><a href="${ctx}/index.jsp">Home</a></li>
+                <li class="nav-link"><a href="${ctx}/register.jsp">Register</a></li>
             </ul>
         </nav>
         <h1>Login to Benson</h1>
@@ -26,7 +26,7 @@
             <p>Wrong user name or password.</p>
         </c:if>
         <form action="${ctx}/login" method="post">
-            <input name="name" placeholder="User name" value="${wrong}" required>
+            <input name="name" placeholder="User name" value="${wrong}" autofocus required>
             <input type="password" name="password" placeholder="Password" required>
             <button>Login</button>
         </form>

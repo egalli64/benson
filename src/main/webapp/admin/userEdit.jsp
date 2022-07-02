@@ -18,6 +18,7 @@
         <nav>
             <ul class="nav justify-content-end">
                 <li class="nav-link"><a href="${ctx}/index.jsp">Home</a></li>
+                <li class="nav-link"><a href="${ctx}/admin/index.jsp">Administration</a></li>
             </ul>
         </nav>
         <h1>Change User Data</h1>

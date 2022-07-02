@@ -17,6 +17,7 @@
     <div class="container-fluid">
         <nav>
             <ul class="nav justify-content-end">
+                <li class="nav-link"><a href="${ctx}/index.jsp">Home</a></li>
                 <li class="nav-link"><a href="${ctx}/user/changePwd.jsp">${user.name}</a></li>
                 <li class="nav-link"><a href="${ctx}/logout">Logout</a></li>
             </ul>

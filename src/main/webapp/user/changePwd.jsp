@@ -18,9 +18,12 @@
         <nav>
             <ul class="nav justify-content-end">
                 <li class="nav-link"><a href="${ctx}/index.jsp">Home</a></li>
+                <c:if test="${user.administrator}">
+                    <li class="nav-link"><a href="${ctx}/admin/index.jsp">Administration</a></li>
+                </c:if>
             </ul>
         </nav>
-        <h1>Change password</h1>
+        <h1>Change ${user.name} password</h1>
         <c:if test="${wrong ne null}">
             <p>${wrong}</p>
         </c:if>
