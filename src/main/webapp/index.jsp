@@ -59,9 +59,9 @@
                             </a>
                         </div>
                         <div class="carousel-item">
-                            <a href="https://www.oracle.com/it/java/technologies/java-ee-glance.html"
-                                target="_blank"> <img src="${ctx}/img/java-ee.png" class="d-block w-100"
-                                alt="Java EE">
+                            <a href="https://jakarta.ee/"
+                                target="_blank"> <img src="${ctx}/img/jakarta-ee.png" class="d-block w-100"
+                                alt="Jakarta EE">
                             </a>
                         </div>
                         <div class="carousel-item">
@@ -75,8 +75,8 @@
                             </a>
                         </div>
                         <div class="carousel-item">
-                            <a href="https://www.heroku.com/" target="_blank"> <img
-                                src="${ctx}/img/heroku.jpg" class="d-block w-100" alt="Heroku">
+                            <a href="https://render.com/" target="_blank"> <img
+                                src="${ctx}/img/render.svg" class="d-block w-100" alt="Render">
                             </a>
                         </div>
                     </div>
