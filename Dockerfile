@@ -18,7 +18,7 @@ RUN apt-get update && \
     tar xzvf apache-tomcat-10.1.29.tar.gz && \
     mv apache-tomcat-10.1.29 /usr/local/tomcat
 
-COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/app.war
+COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
 
