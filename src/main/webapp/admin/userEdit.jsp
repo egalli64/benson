@@ -9,9 +9,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:;base64,=">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-    crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
     <div class="container-fluid">
@@ -34,7 +33,8 @@
                 <label>Password <input name="password" placeholder="New password"></label>
             </div>
             <div>
-                <label>Administrator <input type="checkbox" name="administrator" <c:if test="${current.administrator}">checked</c:if>></label>
+                <label>Administrator <input type="checkbox" name="administrator"
+                    <c:if test="${current.administrator}">checked</c:if>></label>
             </div>
             <div>
                 <button>Change</button>

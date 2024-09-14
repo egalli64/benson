@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="ctx" scope="page" value="${pageContext.request.contextPath}"/>
+<c:set var="ctx" scope="page" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html>
@@ -9,12 +9,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:;base64,=">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-    crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
     <div class="container-fluid">
@@ -46,22 +42,16 @@
         <div class="row">
             <div class="col-4"></div>
             <div class="col-4">
-                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="1000">
+                <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item">
-                            <a href="https://www.w3.org/" target="_blank"> <img src="${ctx}/img/w3c.png"
-                                class="d-block w-100" alt="W3C">
-                            </a>
-                        </div>
                         <div class="carousel-item active">
-                            <a href="https://tomcat.apache.org/" target="_blank"> <img
-                                src="${ctx}/img/tomcat.jpg" class="d-block w-100" alt="Apache Tomcat">
+                            <a href="https://tomcat.apache.org/" target="_blank"> <img src="${ctx}/img/tomcat.jpg"
+                                class="d-block w-100" alt="Apache Tomcat">
                             </a>
                         </div>
                         <div class="carousel-item">
-                            <a href="https://jakarta.ee/"
-                                target="_blank"> <img src="${ctx}/img/jakarta-ee.png" class="d-block w-100"
-                                alt="Jakarta EE">
+                            <a href="https://jakarta.ee/" target="_blank"> <img src="${ctx}/img/jakarta-ee.png"
+                                class="d-block w-100" alt="Jakarta EE">
                             </a>
                         </div>
                         <div class="carousel-item">
@@ -70,13 +60,18 @@
                             </a>
                         </div>
                         <div class="carousel-item">
-                            <a href="https://getbootstrap.com/" target="_blank"> <img
-                                src="${ctx}/img/bootstrap.svg" class="d-block w-100" alt="Bootstrap">
+                            <a href="https://www.w3.org/" target="_blank"> <img src="${ctx}/img/w3c.png"
+                                class="d-block w-100" alt="W3C">
                             </a>
                         </div>
                         <div class="carousel-item">
-                            <a href="https://render.com/" target="_blank"> <img
-                                src="${ctx}/img/render.svg" class="d-block w-100" alt="Render">
+                            <a href="https://getbootstrap.com/" target="_blank"> <img src="${ctx}/img/bootstrap.svg"
+                                class="d-block w-100" alt="Bootstrap">
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="https://render.com/" target="_blank"> <img src="${ctx}/img/render.svg"
+                                class="d-block w-100" alt="Render">
                             </a>
                         </div>
                     </div>
@@ -85,5 +80,14 @@
             <div class="col-4"></div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+					const carousel = new bootstrap.Carousel(document
+							.querySelector('#myCarousel'), {
+						interval : 3000
+					});
+				</script>
 </body>
 </html>
