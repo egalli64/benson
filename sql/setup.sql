@@ -1,10 +1,9 @@
--- Before running heroku psql, ensure Postgres, Heroku, Git are available!
--- set path=C:\Program Files\PostgreSQL\14\bin;C:\Program Files\heroku\bin;C:\Program Files\Git\bin
 --
--- To run this script from psql: \i setup.sql
+-- to access the remote instance from local
+-- psql "postgres://<USER>:<PASSWORD>@dpg-crin63bv2p9s738l0ae0-a.frankfurt-postgres.render.com/benson_ldjp"
 --
 
-drop schema benson cascade;
+drop schema if exists benson cascade;
 create schema benson;
 
 create table benson.user (
