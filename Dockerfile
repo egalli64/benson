@@ -14,9 +14,9 @@ WORKDIR /app
 
 RUN apt-get update && \
     apt-get install -y wget && \
-    wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.24/bin/apache-tomcat-10.1.24.tar.gz && \
-    tar xzvf apache-tomcat-10.1.24.tar.gz && \
-    mv apache-tomcat-10.1.24 /usr/local/tomcat
+    wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.29/bin/apache-tomcat-10.1.29.tar.gz && \
+    tar xzvf apache-tomcat-10.1.29.tar.gz && \
+    mv apache-tomcat-10.1.29 /usr/local/tomcat
 
 COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/app.war
 
