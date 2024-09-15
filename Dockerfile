@@ -10,10 +10,6 @@ RUN mvn package
 
 FROM eclipse-temurin:21-jre-jammy
 
-ENV DB_URL=jdbc:postgresql://dpg-crin63bv2p9s738l0ae0-a/benson_ldjp
-ENV DB_USER=benson
-ENV DB_PASSWORD=YRCNo7fk7BClcD1UWRKS8IcRxOjxoaB9
-
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y wget && \
@@ -27,6 +23,9 @@ RUN apt-get update && apt-get install -y curl && \
 	
 RUN rm -rf /usr/local/tomcat/webapps/ROOT /usr/local/tomcat/webapps/docs /usr/local/tomcat/webapps/examples
 RUN sed -i 's/port="8005"/port="-1"/' /usr/local/tomcat/conf/server.xml
+
+RUN echo 'export CATALINA_OPTS="-DDB_URL=$DB_URL -DDB_USER=$DB_USER -DDB_PASSWORD=$DB_PASSWORD"' > /usr/local/tomcat/bin/setenv.sh
+RUN chmod +x /usr/local/tomcat/bin/setenv.sh
 
 COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 COPY src/main/webapp/META-INF/context_.xml /usr/local/tomcat/conf/context.xml
