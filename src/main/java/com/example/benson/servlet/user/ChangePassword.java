@@ -2,12 +2,15 @@ package com.example.benson.servlet.user;
 
 import java.io.IOException;
 
+import javax.sql.DataSource;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.example.benson.dao.User;
 import com.example.benson.dao.UserDao;
 
+import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,6 +21,9 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/user/changePwd")
 public class ChangePassword extends HttpServlet {
     private static final Logger log = LogManager.getLogger(ChangePassword.class);
+
+    @Resource(name = "jdbc/benson")
+    private DataSource ds;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -30,7 +36,7 @@ public class ChangePassword extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
 
         if (user.getPassword().equals(current)) {
-            try (UserDao dao = new UserDao()) {
+            try (UserDao dao = new UserDao(ds)) {
                 if (dao.updatePasswordById(password, user.getId())) {
                     user.setPassword(password);
                     request.setAttribute("message", "Password correctly changed");

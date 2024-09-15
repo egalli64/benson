@@ -2,11 +2,14 @@ package com.example.benson.servlet.admin;
 
 import java.io.IOException;
 
+import javax.sql.DataSource;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.example.benson.dao.UserDao;
 
+import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,6 +21,9 @@ import jakarta.servlet.http.HttpServletResponse;
 public class UserDelete extends HttpServlet {
     private static final Logger log = LogManager.getLogger(UserDelete.class);
 
+    @Resource(name = "jdbc/benson")
+    private DataSource ds;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -25,7 +31,7 @@ public class UserDelete extends HttpServlet {
         String id = request.getParameter("id");
 
         String message = "User " + id;
-        try (UserDao dao = new UserDao()) {
+        try (UserDao dao = new UserDao(ds)) {
             if (dao.deleteById(Integer.parseInt(id))) {
                 message += " deleted";
             } else {

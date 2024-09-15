@@ -3,6 +3,8 @@ package com.example.benson.servlet;
 import java.io.IOException;
 import java.util.Optional;
 
+import javax.sql.DataSource;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +12,7 @@ import com.example.benson.dao.User;
 import com.example.benson.dao.UserDao;
 import com.example.benson.logic.SimpleCrypto;
 
+import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,6 +24,9 @@ import jakarta.servlet.http.HttpServletResponse;
 public class Login extends HttpServlet {
     private static final Logger log = LogManager.getLogger(Login.class);
 
+    @Resource(name = "jdbc/benson")
+    private DataSource ds;
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,7 +35,7 @@ public class Login extends HttpServlet {
         log.trace("Login request for '" + name + "'");
 
         String url = "index.jsp";
-        try (UserDao dao = new UserDao()) {
+        try (UserDao dao = new UserDao(ds)) {
             Optional<User> user = dao.get(name, SimpleCrypto.encrypt(password));
             if (user.isPresent()) {
                 User logged = user.get();
