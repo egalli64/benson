@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
+    <Environment name="DB_URL" value="${DB_URL}" type="java.lang.String" />
+    <Environment name="DB_USER" value="${DB_USER}" type="java.lang.String" />
+    <Environment name="DB_PASSWORD" value="${DB_PASSWORD}" type="java.lang.String" />
+
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
     <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
     <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
