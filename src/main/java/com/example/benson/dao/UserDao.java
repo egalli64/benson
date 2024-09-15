@@ -2,7 +2,6 @@ package com.example.benson.dao;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,19 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.sql.DataSource;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class UserDao implements AutoCloseable {
-    static {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new IllegalStateException("Database issue " + e.getMessage());
-        }
-    }
-
     private static final Logger log = LogManager.getLogger(UserDao.class);
+
     private static final String GET_ALL = """
             SELECT user_id, name, password, administrator
             FROM benson.user""";
@@ -52,12 +46,19 @@ public class UserDao implements AutoCloseable {
 
     private Connection conn;
 
-    public UserDao() {
+    /**
+     * Set the connection up
+     * 
+     * @param ds data source to the required DBMS
+     * @throws IllegalStateException wrapping the original {@link SQLException}
+     */
+    public UserDao(DataSource ds) {
+        log.traceEntry();
+
         try {
-            String dbUrl = System.getenv("JDBC_DATABASE_URL");
-            this.conn = DriverManager.getConnection(dbUrl);
-        } catch (Exception e) {
-            throw new IllegalStateException("Database issue " + e.getMessage());
+            this.conn = ds.getConnection();
+        } catch (SQLException ex) {
+            throw new IllegalStateException(ex);
         }
     }
 
