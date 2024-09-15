@@ -22,6 +22,7 @@ RUN rm -rf /usr/local/tomcat/webapps/ROOT /usr/local/tomcat/webapps/docs /usr/lo
 RUN sed -i 's/port="8005"/port="-1"/' /usr/local/tomcat/conf/server.xml
 
 COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
+COPY src/main/webapp/META-INF/context_.xml /usr/local/tomcat/conf/context.xml
 
 EXPOSE 8080
 
