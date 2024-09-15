@@ -10,6 +10,10 @@ RUN mvn package
 
 FROM eclipse-temurin:21-jre-jammy
 
+ENV DB_URL=jdbc:postgresql://dpg-crin63bv2p9s738l0ae0-a/benson_ldjp
+ENV DB_USER=benson
+ENV DB_PASSWORD=YRCNo7fk7BClcD1UWRKS8IcRxOjxoaB9
+
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y wget && \
