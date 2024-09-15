@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-    <Environment name="DB_URL" value="${DB_URL}" type="java.lang.String" />
-    <Environment name="DB_USER" value="${DB_USER}" type="java.lang.String" />
-    <Environment name="DB_PASSWORD" value="${DB_PASSWORD}" type="java.lang.String" />
-
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
     <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
     <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
 
     <Resource name="jdbc/benson" type="javax.sql.DataSource"
-        driverClassName="org.postgresql.Driver" auth="Container" url="${DB_URL}"
-        username="${DB_USER}" password="${DB_PASSWORD}" />
+        driverClassName="org.postgresql.Driver" auth="Container"
+        url="jdbc:postgresql://dpg-crin63bv2p9s738l0ae0-a/benson_ldjp" username="benson"
+        password="YRCNo7fk7BClcD1UWRKS8IcRxOjxoaB9" />
 </Context>
