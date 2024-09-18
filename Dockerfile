@@ -13,11 +13,7 @@ FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 
 ARG TOMCAT_V=10.1.30
-ENV TOMCAT_V=${TOMCAT_V}
-
 ARG PG_JDBC_V=42.7.4
-ENV PG_JDBC_V=${PG_JDBC_V}
-
 
 RUN apt-get update && apt-get install -y wget
 
