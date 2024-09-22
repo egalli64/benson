@@ -6,7 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<c:set var="pageTitle" scope="request" value="Benson" />
+<c:set var="pageTitle" scope="request" value="Welcome to Benson" />
 
 <!DOCTYPE html>
 <html>
