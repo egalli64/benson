@@ -5,14 +5,12 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="ctx" scope="page" value="${pageContext.request.contextPath}" />
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<c:set var="pageTitle" scope="request" value="Benson" />
 
 <!DOCTYPE html>
 <html>
-<head>
-<%@include file="/include/link.html"%>
-<title>Benson</title>
-</head>
+<jsp:include page="/include/head.jsp" />
 <body>
     <div class="container-fluid">
         <nav>
