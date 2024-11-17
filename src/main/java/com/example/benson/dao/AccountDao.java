@@ -1,3 +1,8 @@
+/* 
+    Benson - A simple Jakarta EE Web Application
+    
+    https://github.com/egalli64/benson
+ */
 package com.example.benson.dao;
 
 import java.io.IOException;
@@ -15,6 +20,9 @@ import javax.sql.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * DAO for the Account JavaBean
+ */
 public class AccountDao implements AutoCloseable {
     private static final Logger log = LogManager.getLogger(AccountDao.class);
 
@@ -62,6 +70,13 @@ public class AccountDao implements AutoCloseable {
         }
     }
 
+    /**
+     * Fetch account information by name and password
+     * 
+     * @param name     the account name
+     * @param password the account password
+     * @return the account (or empty) optional
+     */
     public Optional<Account> get(String name, String password) {
         log.traceEntry();
 
@@ -81,6 +96,12 @@ public class AccountDao implements AutoCloseable {
         }
     }
 
+    /**
+     * Fetch the account by id
+     * 
+     * @param id the account id
+     * @return the account (or empty) optional
+     */
     public Optional<Account> get(int id) {
         log.traceEntry();
 
@@ -99,6 +120,12 @@ public class AccountDao implements AutoCloseable {
         }
     }
 
+    /**
+     * Make the passed account persistent
+     * 
+     * @param account the account to be stored in database
+     * @return true if the INSERT succeeds
+     */
     public boolean create(Account account) {
         try (PreparedStatement ps = conn.prepareStatement(CREATE)) {
             ps.setString(1, account.getName());
@@ -116,6 +143,12 @@ public class AccountDao implements AutoCloseable {
         return false;
     }
 
+    /**
+     * Update the account in the database
+     * 
+     * @param account the account to be updated
+     * @return true if the UPDATE succeeds
+     */
     public boolean update(Account account) {
         try (PreparedStatement ps = conn.prepareStatement(UPDATE)) {
             ps.setString(1, account.getName());
@@ -134,6 +167,13 @@ public class AccountDao implements AutoCloseable {
         return false;
     }
 
+    /**
+     * Specialized update of account, for password only
+     * 
+     * @param password the new password
+     * @param id       the account id
+     * @return true if the UPDATE succeeds
+     */
     public boolean updatePasswordById(String password, int id) {
         try (PreparedStatement ps = conn.prepareStatement(UPDATE_PASSWORD_BY_ID)) {
             ps.setString(1, password);
@@ -150,6 +190,12 @@ public class AccountDao implements AutoCloseable {
         return false;
     }
 
+    /**
+     * Delete the referenced account
+     * 
+     * @param id the account id
+     * @return true if the DELETE succeeds
+     */
     public boolean deleteById(int id) {
         try (PreparedStatement ps = conn.prepareStatement(DELETE_BY_ID)) {
             ps.setInt(1, id);
@@ -165,6 +211,11 @@ public class AccountDao implements AutoCloseable {
         return false;
     }
 
+    /**
+     * Fetch all the accounts
+     * 
+     * @return all the accounts
+     */
     public List<Account> getAll() {
         List<Account> result = new ArrayList<Account>();
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(GET_ALL)) {

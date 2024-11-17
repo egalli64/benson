@@ -1,5 +1,15 @@
+/* 
+    Benson - A simple Jakarta EE Web Application
+    
+    https://github.com/egalli64/benson
+ */
 package com.example.benson.dao;
 
+/**
+ * JavaBean for the ACCOUNT table
+ * <p>
+ * Notice that plain user has the administrator flag set to false
+ */
 public class Account {
     private int id;
     private String name;
