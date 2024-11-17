@@ -8,8 +8,8 @@ import javax.sql.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.example.benson.dao.User;
-import com.example.benson.dao.UserDao;
+import com.example.benson.dao.Account;
+import com.example.benson.dao.AccountDao;
 import com.example.benson.logic.SimpleCrypto;
 
 import jakarta.annotation.Resource;
@@ -37,10 +37,10 @@ public class UserUpdate extends HttpServlet {
         String administrator = request.getParameter("administrator");
 
         String message = "User " + id;
-        try (UserDao dao = new UserDao(ds)) {
-            Optional<User> opt = dao.get(Integer.parseInt(id));
+        try (AccountDao dao = new AccountDao(ds)) {
+            Optional<Account> opt = dao.get(Integer.parseInt(id));
             if (opt.isPresent()) {
-                User user = opt.get();
+                Account user = opt.get();
                 if (!name.isEmpty()) {
                     user.setName(name);
                 }

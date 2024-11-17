@@ -7,7 +7,7 @@ import javax.sql.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.example.benson.dao.UserDao;
+import com.example.benson.dao.AccountDao;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -29,7 +29,7 @@ public class UserAll extends HttpServlet {
             throws ServletException, IOException {
         log.traceEntry();
 
-        try (UserDao dao = new UserDao(ds)) {
+        try (AccountDao dao = new AccountDao(ds)) {
             request.setAttribute("users", dao.getAll());
         }
         request.getRequestDispatcher("/admin/users.jsp").forward(request, response);

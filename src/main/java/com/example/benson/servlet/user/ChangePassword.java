@@ -7,8 +7,8 @@ import javax.sql.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.example.benson.dao.User;
-import com.example.benson.dao.UserDao;
+import com.example.benson.dao.Account;
+import com.example.benson.dao.AccountDao;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -33,10 +33,10 @@ public class ChangePassword extends HttpServlet {
         String password = request.getParameter("password");
 
         String url = "changePwd.jsp";
-        User user = (User) request.getSession().getAttribute("user");
+        Account user = (Account) request.getSession().getAttribute("user");
 
         if (user.getPassword().equals(current)) {
-            try (UserDao dao = new UserDao(ds)) {
+            try (AccountDao dao = new AccountDao(ds)) {
                 if (dao.updatePasswordById(password, user.getId())) {
                     user.setPassword(password);
                     request.setAttribute("message", "Password correctly changed");

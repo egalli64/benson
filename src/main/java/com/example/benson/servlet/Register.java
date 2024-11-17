@@ -7,8 +7,8 @@ import javax.sql.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.example.benson.dao.User;
-import com.example.benson.dao.UserDao;
+import com.example.benson.dao.Account;
+import com.example.benson.dao.AccountDao;
 import com.example.benson.logic.SimpleCrypto;
 
 import jakarta.annotation.Resource;
@@ -34,8 +34,8 @@ public class Register extends HttpServlet {
         log.trace(name);
 
         if (name != null && !name.isBlank() && password != null && !password.isEmpty()) {
-            User user = new User(name, SimpleCrypto.encrypt(password));
-            try (UserDao dao = new UserDao(ds)) {
+            Account user = new Account(name, SimpleCrypto.encrypt(password));
+            try (AccountDao dao = new AccountDao(ds)) {
                 if (!dao.create(user)) {
                     request.setAttribute("wrong", name);
                     request.getRequestDispatcher("/register.jsp").forward(request, response);

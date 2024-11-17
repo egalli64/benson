@@ -8,8 +8,8 @@ import javax.sql.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.example.benson.dao.User;
-import com.example.benson.dao.UserDao;
+import com.example.benson.dao.Account;
+import com.example.benson.dao.AccountDao;
 import com.example.benson.logic.SimpleCrypto;
 
 import jakarta.annotation.Resource;
@@ -32,20 +32,21 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
-        log.trace("Login request for '" + name + "'");
 
         String url = "index.jsp";
-        try (UserDao dao = new UserDao(ds)) {
-            Optional<User> user = dao.get(name, SimpleCrypto.encrypt(password));
-            if (user.isPresent()) {
-                User logged = user.get();
+        try (AccountDao dao = new AccountDao(ds)) {
+            Optional<Account> account = dao.get(name, SimpleCrypto.encrypt(password));
+            if (account.isPresent()) {
+                log.trace("Login request accepted for '{}'", name);
+
+                Account logged = account.get();
                 if (logged.isAdministrator()) {
                     url = "/admin/";
                 }
                 request.getSession().setAttribute("user", logged);
-                log.trace("Accepted");
             } else {
                 // ask again
+                log.warn("Wrong password for '{}'", name);
                 request.setAttribute("wrong", name);
                 url = "login.jsp";
             }

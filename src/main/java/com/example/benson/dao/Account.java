@@ -1,22 +1,22 @@
 package com.example.benson.dao;
 
-public class User {
+public class Account {
     private int id;
     private String name;
     private String password;
     private boolean administrator;
 
-    public User() {
+    public Account() {
     }
 
-    public User(int id, String name, String password, boolean administrator) {
+    public Account(int id, String name, String password, boolean administrator) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.administrator = administrator;
     }
 
-    public User(String name, String password) {
+    public Account(String name, String password) {
         this(0, name, password, false);
     }
 

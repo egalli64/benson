@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.example.benson.dao.User;
+import com.example.benson.dao.Account;
 import com.example.benson.servlet.Login;
 
 import jakarta.servlet.Filter;
@@ -37,7 +37,7 @@ public class AdminFilter extends HttpFilter implements Filter {
         }
 
         HttpSession session = ((HttpServletRequest) request).getSession();
-        User user = (User) session.getAttribute("user");
+        Account user = (Account) session.getAttribute("user");
 
         if (user == null || !user.isAdministrator()) {
             log.warn("Non-admin request detected!");

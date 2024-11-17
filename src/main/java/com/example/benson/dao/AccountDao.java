@@ -15,34 +15,34 @@ import javax.sql.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class UserDao implements AutoCloseable {
-    private static final Logger log = LogManager.getLogger(UserDao.class);
+public class AccountDao implements AutoCloseable {
+    private static final Logger log = LogManager.getLogger(AccountDao.class);
 
     private static final String GET_ALL = """
-            SELECT user_id, name, password, administrator
-            FROM benson.user""";
+            SELECT account_id, name, password, administrator
+            FROM account""";
     private static final String GET_BY_NAME_AND_PASSWORD = """
-            SELECT user_id, administrator
-            FROM benson.user
+            SELECT account_id, administrator
+            FROM account
             WHERE name = ? AND password =?""";
     private static final String GET_BY_ID = """
             SELECT name, password, administrator
-            FROM benson.user
-            WHERE user_id = ?""";
+            FROM account
+            WHERE account_id = ?""";
     private static final String CREATE = """
-            INSERT INTO benson.user (name, password, administrator)
+            INSERT INTO account (name, password, administrator)
                 VALUES (?, ?, ?)""";
     private static final String UPDATE = """
-            UPDATE benson.user
+            UPDATE account
             SET name = ?, password = ?, administrator = ?
-            WHERE user_id = ?""";
+            WHERE account_id = ?""";
     private static final String UPDATE_PASSWORD_BY_ID = """
-            UPDATE benson.user
+            UPDATE account
             SET password = ?
-            WHERE user_id = ?""";
+            WHERE account_id = ?""";
     private static final String DELETE_BY_ID = """
-            DELETE FROM benson.user
-            WHERE user_id = ?""";
+            DELETE FROM account
+            WHERE account_id = ?""";
 
     private Connection conn;
 
@@ -52,7 +52,7 @@ public class UserDao implements AutoCloseable {
      * @param ds data source to the required DBMS
      * @throws IllegalStateException wrapping the original {@link SQLException}
      */
-    public UserDao(DataSource ds) {
+    public AccountDao(DataSource ds) {
         log.traceEntry();
 
         try {
@@ -62,7 +62,7 @@ public class UserDao implements AutoCloseable {
         }
     }
 
-    public Optional<User> get(String name, String password) {
+    public Optional<Account> get(String name, String password) {
         log.traceEntry();
 
         try (PreparedStatement ps = conn.prepareStatement(GET_BY_NAME_AND_PASSWORD)) {
@@ -70,45 +70,45 @@ public class UserDao implements AutoCloseable {
             ps.setString(2, password);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return Optional.of(new User(rs.getInt(1), name, password, rs.getBoolean(2)));
+                    return Optional.of(new Account(rs.getInt(1), name, password, rs.getBoolean(2)));
                 } else {
                     return Optional.empty();
                 }
             }
         } catch (SQLException se) {
-            log.error("Can't get user: " + se.getMessage());
+            log.error("Can't get account: " + se.getMessage());
             throw new IllegalStateException("Database issue " + se.getMessage());
         }
     }
 
-    public Optional<User> get(int id) {
+    public Optional<Account> get(int id) {
         log.traceEntry();
 
         try (PreparedStatement ps = conn.prepareStatement(GET_BY_ID)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return Optional.of(new User(id, rs.getString(1), rs.getString(2), rs.getBoolean(3)));
+                    return Optional.of(new Account(id, rs.getString(1), rs.getString(2), rs.getBoolean(3)));
                 } else {
                     return Optional.empty();
                 }
             }
         } catch (SQLException se) {
-            log.error("Can't get user: " + se.getMessage());
+            log.error("Can't get account: " + se.getMessage());
             throw new IllegalStateException("Database issue " + se.getMessage());
         }
     }
 
-    public boolean create(User user) {
+    public boolean create(Account account) {
         try (PreparedStatement ps = conn.prepareStatement(CREATE)) {
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getPassword());
+            ps.setString(1, account.getName());
+            ps.setString(2, account.getPassword());
             ps.setBoolean(3, false);
             if (ps.executeUpdate() == 1) {
-                log.trace(String.format("User %s saved", user.getName()));
+                log.trace("Account {} saved", account.getName());
                 return true;
             } else {
-                log.error("Can't save user " + user.getName());
+                log.error("Can't save account " + account.getName());
             }
         } catch (SQLException se) {
             log.error(se.getMessage());
@@ -116,17 +116,17 @@ public class UserDao implements AutoCloseable {
         return false;
     }
 
-    public boolean update(User user) {
+    public boolean update(Account account) {
         try (PreparedStatement ps = conn.prepareStatement(UPDATE)) {
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getPassword());
-            ps.setBoolean(3, user.isAdministrator());
-            ps.setInt(4, user.getId());
+            ps.setString(1, account.getName());
+            ps.setString(2, account.getPassword());
+            ps.setBoolean(3, account.isAdministrator());
+            ps.setInt(4, account.getId());
             if (ps.executeUpdate() == 1) {
-                log.trace(String.format("User %d updated", user.getId()));
+                log.trace("Account {} updated", account.getId());
                 return true;
             } else {
-                log.error("Can't update password for user " + user.getId());
+                log.error("Can't update password for account " + account.getId());
             }
         } catch (SQLException se) {
             log.error(se.getMessage());
@@ -139,10 +139,10 @@ public class UserDao implements AutoCloseable {
             ps.setString(1, password);
             ps.setInt(2, id);
             if (ps.executeUpdate() == 1) {
-                log.trace(String.format("User %d password updated", id));
+                log.trace("Account {} password updated", id);
                 return true;
             } else {
-                log.error("Can't update password for user " + id);
+                log.error("Can't update password for account " + id);
             }
         } catch (SQLException se) {
             log.error(se.getMessage());
@@ -154,10 +154,10 @@ public class UserDao implements AutoCloseable {
         try (PreparedStatement ps = conn.prepareStatement(DELETE_BY_ID)) {
             ps.setInt(1, id);
             if (ps.executeUpdate() == 1) {
-                log.trace(String.format("User %d deleted", id));
+                log.trace("Account {} deleted", id);
                 return true;
             } else {
-                log.error("Can't delete user " + id);
+                log.error("Can't delete account " + id);
             }
         } catch (SQLException se) {
             log.error(se.getMessage());
@@ -165,11 +165,11 @@ public class UserDao implements AutoCloseable {
         return false;
     }
 
-    public List<User> getAll() {
-        List<User> result = new ArrayList<User>();
+    public List<Account> getAll() {
+        List<Account> result = new ArrayList<Account>();
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(GET_ALL)) {
             while (rs.next()) {
-                result.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
+                result.add(new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
             }
         } catch (SQLException se) {
             log.error(se.getMessage());

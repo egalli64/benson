@@ -7,7 +7,7 @@ import javax.sql.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.example.benson.dao.UserDao;
+import com.example.benson.dao.AccountDao;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -31,7 +31,7 @@ public class UserDelete extends HttpServlet {
         String id = request.getParameter("id");
 
         String message = "User " + id;
-        try (UserDao dao = new UserDao(ds)) {
+        try (AccountDao dao = new AccountDao(ds)) {
             if (dao.deleteById(Integer.parseInt(id))) {
                 message += " deleted";
             } else {

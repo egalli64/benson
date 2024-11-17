@@ -8,8 +8,8 @@ import javax.sql.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.example.benson.dao.User;
-import com.example.benson.dao.UserDao;
+import com.example.benson.dao.Account;
+import com.example.benson.dao.AccountDao;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
@@ -32,8 +32,8 @@ public class UserEdit extends HttpServlet {
         log.traceEntry();
         String id = request.getParameter("id");
 
-        try (UserDao dao = new UserDao(ds)) {
-            Optional<User> user = dao.get(Integer.parseInt(id));
+        try (AccountDao dao = new AccountDao(ds)) {
+            Optional<Account> user = dao.get(Integer.parseInt(id));
             if (user.isPresent()) {
                 request.setAttribute("current", user.get());
                 request.getRequestDispatcher("/admin/userEdit.jsp").forward(request, response);
