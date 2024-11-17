@@ -54,8 +54,8 @@
                             </a>
                         </div>
                         <div class="carousel-item">
-                            <a href="https://www.postgresql.org/" target="_blank"> <img
-                                src="${ctx}/img/postgresql.png" class="d-block w-100" alt="PostgreSQL">
+                            <a href="https://www.h2database.com/" target="_blank"> <img
+                                src="${ctx}/img/h2.png" class="d-block w-100" alt="H2">
                             </a>
                         </div>
                         <div class="carousel-item">
