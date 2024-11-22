@@ -5,7 +5,6 @@
  */
 package com.example.benson.dao;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -229,7 +228,7 @@ public class AccountDao implements AutoCloseable {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() throws IllegalStateException {
         try {
             conn.close();
         } catch (SQLException se) {
