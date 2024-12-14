@@ -8,7 +8,7 @@ mkdir -p /app/h2
 if [ ! -f "$DB_FILE" ]; then
     echo "Initializing database..."
     java -cp /usr/local/tomcat/lib/h2.jar org.h2.tools.RunScript \
-        -url "jdbc:h2:/app/h2/benson" \
+        -url "jdbc:h2:file:/app/h2/benson" \
         -user sa \
         -script "$SQL_SCRIPT"
 else
