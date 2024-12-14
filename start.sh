@@ -15,5 +15,7 @@ else
     echo "Database already initialized."
 fi
 
-echo "Starting Tomcat..."
+export CATALINA_OPTS="-Dserver.port=${PORT:-8080}"
+
+echo "Starting Tomcat on port ${PORT:-8080}..."
 exec /usr/local/tomcat/bin/catalina.sh run
