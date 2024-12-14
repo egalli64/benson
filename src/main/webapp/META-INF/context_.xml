@@ -5,6 +5,6 @@
     <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
 
     <Resource name="jdbc/benson" type="javax.sql.DataSource"
-        driverClassName="org.postgresql.Driver" auth="Container" url="${DB_URL}"
+        driverClassName="org.h2.Driver" auth="Container" url="${DB_URL}"
         username="${DB_USER}" password="${DB_PASSWORD}" />
 </Context>
