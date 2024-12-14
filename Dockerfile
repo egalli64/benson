@@ -33,6 +33,8 @@ RUN chmod +x /usr/local/tomcat/bin/setenv.sh
 COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 COPY src/main/webapp/META-INF/context_.xml /usr/local/tomcat/conf/context.xml
 
+RUN ls -l /app/
+RUN ls -l /app/sql/
 RUN java -cp /usr/local/tomcat/lib/h2.jar org.h2.tools.RunScript \
     -url jdbc:h2:./benson -script /app/sql/setup.sql
 
