@@ -34,9 +34,9 @@ COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 COPY --from=build /app/sql /app/sql
 COPY src/main/webapp/META-INF/context_.xml /usr/local/tomcat/conf/context.xml
 
-RUN java -cp /usr/local/tomcat/lib/h2.jar org.h2.tools.RunScript \
-    -url jdbc:h2:./benson -script /app/sql/setup.sql
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
 
 EXPOSE 8080
 
-CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
+CMD ["/app/start.sh"]
