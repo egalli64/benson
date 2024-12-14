@@ -15,6 +15,5 @@ else
     echo "Database already initialized."
 fi
 
-# Start Tomcat
 echo "Starting Tomcat..."
 exec /usr/local/tomcat/bin/catalina.sh run
