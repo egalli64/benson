@@ -8,7 +8,7 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn package
 
-RUN mkdir -p /app/sql && cp src/main/sql/setup.sql /app/sql/setup.sql
+# RUN mkdir -p /app/sql && cp src/main/sql/setup.sql /app/sql/setup.sql
 
 FROM eclipse-temurin:21-jre-jammy
 
@@ -25,14 +25,15 @@ RUN wget https://dlcdn.apache.org/tomcat/tomcat-11/v${TOMCAT_V}/bin/apache-tomca
 RUN wget -O /usr/local/tomcat/lib/h2.jar https://repo1.maven.org/maven2/com/h2database/h2/${H2_V}/h2-${H2_V}.jar
 	
 RUN rm -rf /usr/local/tomcat/webapps/ROOT /usr/local/tomcat/webapps/docs /usr/local/tomcat/webapps/examples
-RUN sed -i 's/port="8005"/port="-1"/' /usr/local/tomcat/conf/server.xml
+# RUN sed -i 's/port="8005"/port="-1"/' /usr/local/tomcat/conf/server.xml
+RUN sed -i 's/<Connector port="8080" protocol="HTTP\/1.1"/<Connector port="${PORT:-8080}" protocol="HTTP\/1.1" address="0.0.0.0"/' /usr/local/tomcat/conf/server.xml
 
 RUN echo 'export CATALINA_OPTS="-DDB_URL=$DB_URL -DDB_USER=$DB_USER -DDB_PASSWORD=$DB_PASSWORD"' > /usr/local/tomcat/bin/setenv.sh
 RUN chmod +x /usr/local/tomcat/bin/setenv.sh
 
 COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
-COPY --from=build /app/sql /app/sql
-COPY src/main/webapp/META-INF/context_.xml /usr/local/tomcat/conf/context.xml
+# COPY --from=build /app/sql /app/sql
+# COPY src/main/webapp/META-INF/context_.xml /usr/local/tomcat/conf/context.xml
 
 # COPY start.sh /app/start.sh
 # RUN chmod +x /app/start.sh
