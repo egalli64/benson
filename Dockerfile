@@ -8,6 +8,8 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn package
 
+RUN mkdir -p /app/sql && cp src/main/sql/setup.sql /app/sql/setup.sql
+
 FROM eclipse-temurin:21-jre-jammy
 
 WORKDIR /app
@@ -32,7 +34,7 @@ COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 COPY src/main/webapp/META-INF/context_.xml /usr/local/tomcat/conf/context.xml
 
 RUN java -cp /usr/local/tomcat/lib/h2.jar org.h2.tools.RunScript \
-    -url jdbc:h2:./benson -script src/main/sql/setup.sql
+    -url jdbc:h2:./benson -script /app/sql/setup.sql
 
 EXPOSE 8080
 
