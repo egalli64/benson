@@ -34,9 +34,10 @@ COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 COPY --from=build /app/sql /app/sql
 COPY src/main/webapp/META-INF/context_.xml /usr/local/tomcat/conf/context.xml
 
-COPY start.sh /app/start.sh
-RUN chmod +x /app/start.sh
+# COPY start.sh /app/start.sh
+# RUN chmod +x /app/start.sh
 
 EXPOSE 8080
 
-CMD ["/app/start.sh"]
+# CMD ["/app/start.sh"]
+CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
