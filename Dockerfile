@@ -33,7 +33,7 @@ RUN chmod +x /usr/local/tomcat/bin/setenv.sh
 
 COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 # COPY --from=build /app/sql /app/sql
-# COPY src/main/webapp/META-INF/context_.xml /usr/local/tomcat/conf/context.xml
+COPY src/main/webapp/META-INF/context_.xml /usr/local/tomcat/conf/context.xml
 
 # COPY start.sh /app/start.sh
 # RUN chmod +x /app/start.sh
